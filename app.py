@@ -8,7 +8,8 @@ st.set_page_config(
     page_icon="🩺"
 )
 
-# Load model
+st.title("Diabetes Prediction Chatbot")
+
 @st.cache_resource
 def load_model():
     with open('models/diabetes_model.pkl', 'rb') as f:
@@ -17,16 +18,14 @@ def load_model():
 
 model, scaler, features = load_model()
 
-# Initialize session state
 if 'messages' not in st.session_state:
     st.session_state.messages = [
-        {"role": "assistant", "content": "Hello! I'm your Diabetes Risk Assessment Assistant. Let's check your risk factors."},
+        {"role": "assistant", "content": "Hello! I'm your Diabetes Risk Assessment Assistant. Let me check your risk factors."},
         {"role": "assistant", "content": "How many times have you been pregnant? (Enter 0 if not applicable)"}
     ]
     st.session_state.current_question = 0
     st.session_state.answers = {}
 
-# Questions in order
 questions = [
     ("Pregnancies", "How many times have you been pregnant? (Enter 0 if not applicable)"),
     ("Glucose", "What is your plasma glucose concentration (mg/dL) from 2 hours in an oral glucose tolerance test?"),
@@ -38,7 +37,7 @@ questions = [
     ("Age", "How old are you?")
 ]
 
-# Display chat messages
+
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])

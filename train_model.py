@@ -6,7 +6,6 @@ import pickle
 import h5py
 from sklearn.preprocessing import StandardScaler
 
-# Load data
 df = pd.read_csv('data/diabetes.csv')
 
 # Handle missing values (0s in medical measurements)
@@ -44,4 +43,3 @@ with open('models/diabetes_model.pkl', 'wb') as f:
 # Save model with HDF5 (alternative)
 with h5py.File('models/diabetes_model.h5', 'w') as hf:
     hf.create_dataset('model_params', data=model.get_params())
-    # Note: For full HDF5 support, consider using Keras/TensorFlow models
