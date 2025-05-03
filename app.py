@@ -13,10 +13,10 @@ st.title("Diabetes Prediction Chatbot")
 @st.cache_resource
 def load_model():
     with open('models/diabetes_model.pkl', 'rb') as f:
-        data = pickle.load(f)
+        data =pickle.load(f)
     return data['model'], data['scaler'], data['features']
 
-model, scaler, features = load_model()
+model,scaler,features = load_model()
 
 if 'messages' not in st.session_state:
     st.session_state.messages = [
@@ -43,7 +43,7 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # Get user input
-if prompt := st.chat_input("Type your answer here..."):
+if prompt :=st.chat_input("Type your answer here..."):
     # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
     
@@ -84,6 +84,6 @@ if st.session_state.messages and st.session_state.messages[-1]["content"].lower(
         {"role": "assistant", "content": "Hello! I'm your Diabetes Risk Assessment Assistant. Let's check your risk factors."},
         {"role": "assistant", "content": "How many times have you been pregnant? (Enter 0 if not applicable)"}
     ]
-    st.session_state.current_question = 0
-    st.session_state.answers = {}
+    st.session_state.current_question =0
+    st.session_state.answers ={}
     st.rerun()
